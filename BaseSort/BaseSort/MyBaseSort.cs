@@ -1,18 +1,9 @@
 using System;
-using System.Linq;
 
 namespace BaseSort
 {
-    class Program
+    public class MyBaseSort
     {
-        static void Main(string[] args)
-        {
-            int[] arr = { 3, 2, 1, 5, 6, 4 };
-            BubbleSort(arr);
-            arr.ToList().ForEach(Console.WriteLine);
-            Console.Read();
-        }
-
         #region 冒泡排序
         /// <summary>
         /// 冒泡排序
@@ -20,11 +11,11 @@ namespace BaseSort
         /// 该排序是稳定的
         /// </summary>
         /// <param name="array"></param>
-        public static void BubbleSort(int[] array)
+        public void BubbleSort(int[] array)
         {
             for (int i = array.Length - 1; i >= 0; i--)
             {
-                int flag = 0;
+                bool flag = false;  //用于标识这趟冒泡排序是否进行了元素的交换
                 for (int j = 0; j < i; j++)
                 {
                     if (array[j] > array[j + 1])
@@ -32,18 +23,18 @@ namespace BaseSort
                         int temp = array[j];
                         array[j] = array[j + 1];
                         array[j + 1] = temp;
-                        flag++;
+                        flag = true;
                     }
                 }
 
-                if (flag == 0)
+                if (!flag)
                     break;
             }
         }
         #endregion
 
         #region 插入排序
-        public static void InsertionSort(int[] array)
+        public void InsertionSort(int[] array)
         {
 
         }
