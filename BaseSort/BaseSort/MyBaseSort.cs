@@ -34,9 +34,29 @@ namespace BaseSort
         #endregion
 
         #region 插入排序
+        /// <summary>
+        /// 插入排序
+        /// 时间复杂度：最好情况 O(n),最差情况 O(n^2)
+        /// 稳定性：稳定的
+        /// </summary>
+        /// <param name="array"></param>
         public void InsertionSort(int[] array)
         {
+            //默认第一个是最小的
+            for(int i = 1; i < array.Length; i++)
+            {
+                int temp = array[i];//将要插入的数值
+                int insertIndex = i - 1;//前一个数的下标
 
+                //如果条件满足，说明没找到适当的位置
+                while (insertIndex>=0&&temp<array[insertIndex])
+                {
+                    array[insertIndex + 1] = array[insertIndex]; //同时把比插入数要大的数往后移
+                    insertIndex--;//指针后移
+                }
+                //插入数据
+                array[insertIndex + 1] = temp;
+            }
         }
         #endregion
     }
