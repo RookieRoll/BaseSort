@@ -43,13 +43,13 @@ namespace BaseSort
         public void InsertionSort(int[] array)
         {
             //默认第一个是最小的
-            for(int i = 1; i < array.Length; i++)
+            for (int i = 1; i < array.Length; i++)
             {
                 int temp = array[i];//将要插入的数值
                 int insertIndex = i - 1;//前一个数的下标
 
                 //如果条件满足，说明没找到适当的位置
-                while (insertIndex>=0&&temp<array[insertIndex])
+                while (insertIndex >= 0 && temp < array[insertIndex])
                 {
                     array[insertIndex + 1] = array[insertIndex]; //同时把比插入数要大的数往后移
                     insertIndex--;//指针后移
@@ -59,5 +59,37 @@ namespace BaseSort
             }
         }
         #endregion
+
+        #region 希尔排序
+        /// <summary>
+        /// 希尔排序
+        /// 时间复杂度：Θ(N^2)
+        /// 稳定性：不稳定
+        /// </summary>
+        /// <param name="array"></param>
+        public void ShellSort(int[] array)
+        {
+            int length = array.Length;
+            for (int h = length / 2; h > 0; h /= 2)
+            {
+                for (int i = h; i < length; i++)
+                {
+                    int temp = array[i];
+                    if (temp < array[i - h])
+                    {
+                        for (int j = 0; j < i; j += h)
+                        {
+                            if (temp<array[j])
+                            {
+                                temp = array[j];
+                                array[j] = array[i];
+                                array[i] = temp;
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+        }
     }
 }
