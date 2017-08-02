@@ -38,5 +38,13 @@ namespace BaseSort.Test
             _sort.ShellSort(result);
             Assert.Equal(test, result);
         }
+        [Fact]
+        public void SelectSortTest()
+        {
+            int[] test = { 1, 2, 3, 4, 5, 6 };
+            int[] result = { 3, 2, 6, 4, 5, 1 };
+            _sort.SelectSort(result);
+            Assert.Equal(test, result);
+        }
     }
 }

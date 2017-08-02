@@ -79,7 +79,7 @@ namespace BaseSort
                     {
                         for (int j = 0; j < i; j += h)
                         {
-                            if (temp<array[j])
+                            if (temp < array[j])
                             {
                                 temp = array[j];
                                 array[j] = array[i];
@@ -89,7 +89,36 @@ namespace BaseSort
                     }
                 }
             }
-            #endregion
         }
+        #endregion
+
+        #region 选择排序
+        /// <summary>
+        /// 选择排序
+        /// </summary>
+        /// <param name="array"></param>
+        public void SelectSort(int[] array)
+        {
+            for(int i = 0; i < array.Length; i++)
+            {
+                int minValue = array[i];
+                int minIndex = i;
+                for(int j = i + 1; j < array.Length; j++)
+                {
+                    if (minValue > array[j])
+                    {
+                        minValue = array[j];
+                        minIndex = j;
+                    }
+                }
+                if (minIndex != i)
+                {
+                    array[minIndex] = array[i];
+                    array[i] = minValue;
+                }
+            }
+            
+        }
+        #endregion
     }
 }
