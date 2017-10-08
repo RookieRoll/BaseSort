@@ -99,11 +99,11 @@ namespace BaseSort
         /// <param name="array"></param>
         public void SelectSort(int[] array)
         {
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 int minValue = array[i];
                 int minIndex = i;
-                for(int j = i + 1; j < array.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
                     if (minValue > array[j])
                     {
@@ -117,7 +117,83 @@ namespace BaseSort
                     array[i] = minValue;
                 }
             }
-            
+
+        }
+        #endregion
+
+        #region 快速排序
+        private int SortUnit(int[] array, int low, int high)
+        {
+            int key = array[low];
+            while (low < high)
+            {
+                while (array[high] > key && high > low)
+                    high--;
+                while (array[low] <= key && high > low)
+                    low++;
+                array[high] = array[low];
+            }
+            array[low] = key;
+            return high;
+        }
+
+        public void QuickSort(int[] array, int low, int high)
+        {
+            if (low >= high)
+            {
+                return;
+            }
+            int index = SortUnit(array, low, high);
+            QuickSort(array, low, index - 1);
+            QuickSort(array, index + 1, high);
+        }
+        #endregion
+
+        #region 堆排序
+        public void HeapSort(int[] array)
+        {
+            BuildMaxHeap(array);
+
+            for(int i = array.Length; i > 0; i++)
+            {
+                Swap(ref array[0], ref array[i]);
+                MaxHeaping(array, 0, 1);
+            }
+        }
+        private void BuildMaxHeap(int[] array)
+        {
+            for(int i = (array.Length / 2) - 1; i >= 0; i--)
+            {
+                MaxHeaping(array,i,array.Length);
+            }
+        }
+
+        private void MaxHeaping(int[] array,int i,int heapSize)
+        {
+            int left = (2 * i) + 1;
+            int right = 2 * (i + 1);
+            int large = i;
+
+            if (left < heapSize && array[left] > array[large])
+            {
+                large = left;
+            }
+            if (right < heapSize && array[right] > array[large])
+            {
+                large = right;
+            }
+
+            if (i != large)
+            {
+                Swap(ref array[i], ref array[large]);
+                MaxHeaping(array,large,heapSize);
+            }
+        }
+        private void Swap(ref int a,ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
         }
         #endregion
     }
