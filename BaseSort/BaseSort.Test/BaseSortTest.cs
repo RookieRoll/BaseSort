@@ -46,5 +46,23 @@ namespace BaseSort.Test
             _sort.SelectSort(result);
             Assert.Equal(test, result);
         }
+
+        [Fact]
+        public void HeapSortTest()
+        {
+            int[] test = { 1, 2, 3, 4, 5, 6 };
+            int[] result = { 3, 2, 6, 4, 5, 1 };
+            _sort.HeapSort(result);
+            Assert.Equal(test, result);
+        }
+
+        [Fact]
+        public void MergeSortTest()
+        {
+            int[] test = { 1, 2, 3, 4, 5, 6 };
+            int[] result = { 3, 2, 6, 4, 5, 1 };
+            _sort.MergeSort(result);
+            Assert.Equal(test, result);
+        }
     }
 }

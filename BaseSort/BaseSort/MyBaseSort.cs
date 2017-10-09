@@ -154,21 +154,22 @@ namespace BaseSort
         {
             BuildMaxHeap(array);
 
-            for(int i = array.Length; i > 0; i++)
+            int length = array.Length;
+            for (int i = length - 1; i > 0; i--)
             {
                 Swap(ref array[0], ref array[i]);
-                MaxHeaping(array, 0, 1);
+                MaxHeaping(array, 0, --length);
             }
         }
         private void BuildMaxHeap(int[] array)
         {
-            for(int i = (array.Length / 2) - 1; i >= 0; i--)
+            for (int i = (array.Length / 2) - 1; i >= 0; i--)
             {
-                MaxHeaping(array,i,array.Length);
+                MaxHeaping(array, i, array.Length);
             }
         }
 
-        private void MaxHeaping(int[] array,int i,int heapSize)
+        private void MaxHeaping(int[] array, int i, int heapSize)
         {
             int left = (2 * i) + 1;
             int right = 2 * (i + 1);
@@ -186,16 +187,50 @@ namespace BaseSort
             if (i != large)
             {
                 Swap(ref array[i], ref array[large]);
-                MaxHeaping(array,large,heapSize);
+                MaxHeaping(array, large, heapSize);
             }
         }
-        private void Swap(ref int a,ref int b)
+        private void Swap(ref int a, ref int b)
         {
             int temp = a;
             a = b;
             b = temp;
         }
         #endregion
+
+        #region 归并排序
+        private void Merge(int[] array,int first,int middle,int last)
+        {
+            var temp = new int[last - first + 1];
+            int i = first, j = middle + 1, m = middle, n = last, k = 0;
+            while (i <= m && j <= n)
+            {
+                if (array[i] <= array[j]) temp[k++] = array[i++];
+                else temp[k++] = array[j++];
+            }
+            while (i <= m) temp[k++] = array[i++];
+            while (j <= n) temp[k++] = array[j++];
+
+            for(var t = 0; t < k; t++)
+            {
+                array[t + first] = temp[t];
+            }
+        }
         
+        private void MergeSort(int[] array,int first,int last)
+        {
+            if (first < last)
+            {
+                int middle = (first + last) / 2;
+                MergeSort(array, first, middle);
+                MergeSort(array, middle + 1, last);
+                Merge(array,first,middle,last);
+            }
+        }
+        public void MergeSort(int[] array)
+        {
+            MergeSort(array, 0, array.Length-1);
+        }
+        #endregion
     }
 }
